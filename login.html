@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Image</title>
+    <style>
+        body {
+            background-image: url('bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        
+        h1 {
+            color: white;
+            vertical-align: middle;
+            margin-left: 600px; 
+        }
+
+        p {
+            color: white;
+            vertical-align: middle;
+            margin-left: 638px;
+        }
+
+        .logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px; 
+            height: auto;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.5); 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        .login-container h1 {
+            color: black;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            background: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <img src="logo.jpg" alt="Logo" class="logo">
+    <h1><u>Citizen & Constitution</u></h1>
+    <p>Each citizen's rights and duties</p>
+    <br>
+    <hr/>
+    <br><br><br><br><br>
+    <center>
+        <div class="login-container">
+            <h2 style="color: black;"><u>LOGIN</u></h2>
+            <form>
+                <input type="text" name="username" placeholder="Username" required><br><br>
+                <input type="password" name="password" placeholder="Password" required>
+ <div class="forgot-password"><br>
+            Forgot Password?| <a href="forgot_pass.html">Reset Password</a>
+        </div>
+                <button type="submit">Login</button>
+               <br><br>
+<div>Don't have an account?<a href=#>Sign up with google</a>
+
+    </div>
+
+            </form>
+        </div>
+    </center>
+    <script>
+        function loginUser(event) {
+            event.preventDefault(); // Prevent form submission
+            // Simulating a successful login (Replace this with actual authentication)
+            const username = document.querySelector("input[name='username']").value;
+            const password = document.querySelector("input[name='password']").value;
+            
+            if (username && password) { // Simulating login success
+                localStorage.setItem('isLoggedIn', 'true'); // Store login state
+                window.location.href = "lang.html"; // Redirect to language selection
+            } else {
+                alert("Invalid credentials. Please try again.");
+            }
+        }
+        
+        document.querySelector("form").addEventListener("submit", loginUser);
+    </script>
+</body>
+</html>

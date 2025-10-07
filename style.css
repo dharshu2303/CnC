@@ -1,0 +1,138 @@
+/* General Page Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    scroll-behavior: smooth;
+    color: white;
+    background: url('bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+}
+
+header nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 2.5rem;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.logo-container {
+    position: absolute;
+    top: 20px; /* Adjust the logo position */
+    width: 100%;
+    text-align: center;
+}
+
+.logo {
+    width: 100px; /* Adjust the logo size */
+    height: auto;
+    margin-bottom: 20px; /* Space between logo and title */
+}
+
+.hero h1 {
+    font-size: 3rem;
+    color: #fff;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    color: #ddd;
+}
+
+/* Common Content Section Styling */
+.content-section {
+    padding: 80px 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    background: rgba(0, 0, 0, 0.5);
+    margin: 20px 0;
+}
+
+.content-section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content-section h2 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.content-section p {
+    font-size: 1.2rem;
+    color: #ddd;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Specific Section Styling */
+.about-us {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.who-we-are {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.why-choose-us {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.why-choose-us ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+.why-choose-us li {
+    margin: 10px 0;
+}
+
+.our-mission {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .content-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .content-section p {
+        font-size: 1rem;
+    }
+}
