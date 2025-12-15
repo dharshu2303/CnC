@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="translations.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('bg1.jpg'); /* Replace with your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: black;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+        }
+        h1 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for better readability */
+            text-align: center;
+            font-weight: bolder;
+            font-size: xx-large;
+        }
+        header nav {
+            display: flex;
+            align-items: center;
+        }
+        header nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white; /* Change color to white for contrast */
+            font-weight: bold;
+        }
+        .nav-right {
+        display: flex;
+        align-items: center;
+        color: white; /* Change color to white for contrast */
+        font-weight: bold;
+    }
+    .nav-right button {
+        margin: 0 5px; /* Add space between the buttons */
+        padding: 5px 10px; /* Ensure buttons are the same size */
+        font-size: 16px; 
+    }
+    .nav-right div {
+        margin-left: 15px;
+        display: none; /* Initially hidden */
+    }
+        .container {
+            width: 100%;
+            max-width: 900px; /* Increased max-width for better spacing */
+            margin: 50px auto; /* Center container with margin */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a modern look */
+            text-align: center; /* Center align text */
+        }
+        .module {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 80%; /* Stretch across the container width */
+            padding: 25px 30px; /* Larger padding for better spacing */
+            margin: 15px 0;
+            background-color: #f0f8ff; /* Attractive light blue color */
+            border: 2px solid black; /* Black border for emphasis */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a modern look */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-weight: 800;
+        }
+        .module:hover {
+            background-color: grey; /* Darker grey on hover */
+            color: #ffffff; /* White text for contrast */
+            transform: scale(1.05); /* Slight zoom effect */
+        }
+    </style>
+    <script>
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+    
+</head>
+<body>
+    
+    <header>
+        <div>
+             <nav>
+            
+                <img src="C:/xampp/htdocs/project/logo.jpg" alt="Logo" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">
+                <a href="login.html"><span id="home" data-translate="home">Home</span>
+            </a>
+            <a href="about_us.html" id="aboutUs" data-translate="about_us">About</a>
+            <a href="hello.html" id="courses"data-translate="courses">Courses</a>
+            <a href="#" id="profile"data-translate="profile">Profile</a>
+        </nav>
+        </div>
+        <div class="nav-right">
+            <!-- Streak Button -->
+            <button onclick="toggleVisibility('streak')" data-translate="streak">Streak 🔥</button>
+            <div id="streak">
+                <div id="streak-container">
+                    🔥 <span data-translate="streak">Streak</span>: <span id="streak-count">5</span> days
+                </div>
+            </div>
+        
+            <!-- Add space -->
+            <span style="margin: 0 10px;"></span>
+        
+            <!-- Coins Button -->
+            <button onclick="toggleVisibility('coins')" data-translate="coins">Coins 🪙</button>
+            <div id="coins">
+                <div id="coin-container">
+                    🪙 <span data-translate="coins">Coins</span>: <span id="coin-count">0</span>
+                </div>
+    </header>
+
+    <div class="container">
+        <h1 data-translate="modules">Course Modules</h1>
+        <div class="module" onclick="location.href='preamble.html'">
+            <span data-translate="preamble">Preamble</span>
+        </div>
+        <div class="module" onclick="location.href='fund_rights.html'">
+            <span data-translate="fundamental_rights">Fundamental Rights</span>
+        </div>
+        <div class="module" onclick="location.href='fund_duties.html'">
+            <span data-translate="fundamental_duties">Fundamental Duties</span>
+        </div>
+        <div class="module" onclick="location.href='dpsp.html'">
+            <span data-translate="dpsp">Directive Principles of State Policy (DPSP)</span>
+        </div>
+        <div class="module" onclick="location.href='struc_of_govt.html'">
+            <span data-translate="structure_of_government">Structure of Government</span>
+        </div>
+        <div class="module" onclick="location.href='amend.html'">
+            <span data-translate="amendment_cases">Amendment & Important Cases</span>
+        </div>
+    </div>
+        <script>
+        function applyTranslations() {
+            document.getElementById("home").innerText = translations[lang].home;
+            document.getElementById("aboutUs").innerText = translations[lang].about_us;
+            document.getElementById("courses").innerText = translations[lang].courses;
+            document.getElementById("profile").innerText = translations[lang].profile;
+            
+            document.getElementById("coins").innerText = translations[lang].coins;
+
+            document.getElementById("streak").innerText = translations[lang].streak;
+            const lang = localStorage.getItem("selectedLanguage") || "en"; 
+            document.querySelectorAll("[data-translate]").forEach(element => {
+                const key = element.getAttribute("data-translate");
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerText = translations[lang][key];
+                }
+            });
+        }
+        document.addEventListener("DOMContentLoaded", applyTranslations);
+    </script>
+
+</body>
+</html>

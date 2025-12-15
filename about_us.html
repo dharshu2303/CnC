@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizens & Constitution</title>
+    <link rel="stylesheet" href="style.css">
+<body>
+    
+    <header>
+        <div>
+            
+            
+            <nav>
+                <img src="C:/xampp/htdocs/project/logo.jpg" alt="Logo" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">
+               <a href="login.html"><span id="home">Home</span></a>
+                <a href="login.html" data-translate="home">Home</a>
+                <a href="about_us.html" data-translate="about_us">About</a>
+                <a href="module.html" data-translate="courses">Courses</a>
+                <a href="#" data-translate="profile">Profile</a>
+            </nav>
+        </div>
+    </header>
+    <!-- Hero Section with Logo -->
+    <section class="hero">
+        <!-- Logo on top -->
+        <h1 data-translate="welcomeTitle">Welcome to Citizens & Constitution</h1>
+        <p data-translate="tagline">Your Fun Way to Learn the Indian Constitution!</p>
+    </section>
+    
+    <!-- About Us -->
+    <section class="content-section about-us">
+        <h2 data-translate="about_us">About Us</h2>
+        <p class="justify-align" data-translate="aboutText1">
+            At Citizens & Constitution, we believe that understanding the Constitution of India should be simple, engaging, and accessible to everyone—whether you’re a curious child or an informed adult.
+        </p>
+        <p class="justify-align" data-translate="aboutText2">
+            Our platform is designed to bring constitutional knowledge to life through interactive activities and games that make learning enjoyable for all ages.
+        </p>
+    </section>
+    
+    <!-- Who We Are -->
+    <section class="content-section who-we-are">
+        <h2 data-translate="whoWeAreTitle">Who We Are</h2>
+        <p class="justify-align" data-translate="whoWeAreText">
+            Our goal is to simplify constitutional knowledge and make it accessible to everyone. We aim to make learning about the Constitution fun and engaging with a wide variety of activities.
+        </p>
+    </section>
+    
+    <!-- Why Choose Us -->
+    <section class="content-section why-choose-us">
+        <h2 data-translate="whyChooseTitle">Why Choose Us?</h2>
+        <div class="centered-paragraph">
+            <p data-translate="whyChooseText1">
+                📚 Simplified Content: We break down complex concepts of the Constitution into easy-to-understand language, making it accessible for everyone—young and old.
+            </p>
+            <p data-translate="whyChooseText2">
+                🎮 Interactive Learning: Our fun-filled games and interactive activities such as Spin the Wheel, Snake & Ladder, and Board Games make learning engaging and memorable.
+            </p>
+            <p data-translate="whyChooseText3">
+                🌍 Multilingual Access: To make learning inclusive, we provide our content in multiple languages, ensuring that language is never a barrier to understanding.
+            </p>
+            <p data-translate="whyChooseText4">
+                👨‍👩‍👧‍👦 Inclusive for All Ages: Our platform is designed with a user-friendly interface and colorful design, ensuring it’s engaging for kids and informative for adults alike.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Our Mission -->
+    <section class="content-section our-mission">
+        <h2 data-translate="missionTitle">Our Mission</h2>
+        <p class="justify-align" data-translate="missionText1">
+            Our mission is to make constitutional literacy a household concept by providing tools that educate and empower every citizen, young and old.
+        </p>
+        <p class="justify-align" data-translate="missionText2">
+            By combining knowledge with fun, we aim to foster a deeper understanding of the rights, responsibilities, and values that shape our democracy.
+        </p>
+        <p class="justify-align" data-translate="missionText3">
+            <b>Let’s learn together and build a stronger, informed nation!</b>
+        </p>
+    </section>
+    <script>
+        function applyTranslations() {
+            const lang = localStorage.getItem("selectedLanguage") || "en"; // Default to English
+
+            // Apply translations dynamically for all elements with 'data-translate' attribute
+            document.querySelectorAll("[data-translate]").forEach(element => {
+                const key = element.getAttribute("data-translate");
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerText = translations[lang][key];
+                }
+            });
+        }
+    
+        document.addEventListener("DOMContentLoaded", applyTranslations);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Reset</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('bg.jpg') center/cover no-repeat;
+            filter: blur(5px);
+            z-index: -1;
+        }
+
+        .login-box {
+            background: rgba(0, 0, 0, 0.75);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            width: 320px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+
+        .logo {
+            width: 150px;
+            margin: 15px 0;
+        }
+
+        input[type="email"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button {
+            background-color: #90ee90;
+            color: black;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 15px;
+            color: #cfe8ff;
+            text-decoration: underline;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2><u>Citizen & Constitution</u></h2>
+        <img src="logo.jpg" alt="Logo" class="logo">
+        <p>Please enter your e-mail address</p>
+        <form>
+            <input type="email" placeholder="E Mail" required><br><br>
+            <button type="submit">SEND PASSWORD RESET LINK</button><br>
+        </form>
+        <a href="login.html" class="back-link">BACK TO LOGIN</a>
+    </div>
+</body>
+</html>

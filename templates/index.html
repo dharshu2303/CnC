@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Power Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 3rem;
+        }
+        
+        .prediction-card {
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: none;
+        }
+        
+        .prediction-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+        }
+        
+        .btn-predict {
+            background-color: var(--secondary-color);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+        
+        .btn-predict:hover {
+            background-color: #2980b9;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .power-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        .weather-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        
+        .tip-card {
+            border-left: 4px solid var(--secondary-color);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tip-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        #loading-spinner {
+            display: none;
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin: 2rem 0;
+        }
+        
+        .main-content {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-solar-panel me-2"></i>SolarPredict
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <section class="hero-section">
+            <div class="container text-center">
+                <h1 class="display-4 fw-bold mb-4">Solar Power Generation Predictor</h1>
+                <p class="lead mb-5">Get accurate solar power predictions based on real-time weather data for any location</p>
+                
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card prediction-card">
+                            <div class="card-header">
+                                <h3 class="mb-0">Make a Prediction</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="predictionForm">
+                                    <div class="mb-3">
+                                        <label for="cityInput" class="form-label">Enter City Name</label>
+                                        <input type="text" class="form-control" id="cityInput" 
+                                               placeholder="e.g., Dindigul, London, New York" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-predict btn-lg w-100">
+                                        <span id="submit-text">Predict Solar Output</span>
+                                        <div id="loading-spinner" class="spinner-border spinner-border-sm ms-2" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </button>
+                                </form>
+                                <div id="error-message" class="alert alert-danger mt-3 d-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="results-section" class="container mb-5" style="display: none;">
+            <div class="card prediction-card">
+                <div class="card-header">
+                    <h3 class="mb-0">Prediction Results</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 id="location-header" class="mb-4"></h4>
+                            
+                            <div class="weather-details mb-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-clock weather-icon"></i>
+                                    <span id="current-time"></span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-cloud weather-icon"></i>
+                                    <span id="weather-description"></span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-temperature-high weather-icon"></i>
+                                    <span id="temperature"></span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-cloud-sun weather-icon"></i>
+                                    <span id="cloud-cover"></span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-wind weather-icon"></i>
+                                    <span id="wind-speed"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="power-output text-center mt-4">
+                                <h5>Predicted Power Generation</h5>
+                                <div class="power-value" id="power-output"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="chart-container">
+                                <canvas id="predictionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <h4 class="mb-3">Optimization Tips</h4>
+                    <div id="tips-container" class="row"></div>
+                    
+                    <div class="text-center mt-4">
+                        <button id="new-prediction-btn" class="btn btn-predict">
+                            <i class="fas fa-redo me-2"></i>Make New Prediction
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="how-it-works" class="container my-5">
+            <h2 class="text-center mb-5">How It Works</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud-sun"></i>
+                        </div>
+                        <h4>Weather Analysis</h4>
+                        <p>Real-time weather data collection including temperature, cloud cover, and solar radiation.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4>AI Prediction</h4>
+                        <p>Advanced machine learning model trained on historical solar data to predict power generation.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4>Optimization Tips</h4>
+                        <p>Personalized recommendations to maximize your solar panel efficiency based on conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+  
+    
+    <!-- JavaScript Resources -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">Preamble Submodule</title>
+    <script src="translations.js"></script> 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('bg2.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: black;
+            overflow: hidden;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .background .triangle,
+        .background .circle {
+            position: absolute;
+            animation: moveBackground 10s infinite linear;
+        }
+
+        .background .triangle {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(0, 102, 204, 0.5);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .background .circle {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(204, 51, 255, 0.5);
+            border-radius: 50%;
+        }
+        @keyframes moveBackground {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(100%, 100%) rotate(360deg);
+            }
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        h1 {
+            color: black;
+            text-align: center;
+            font-weight: bolder;
+            font-size: xx-large;
+        }
+        header nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .nav-right {
+        display: flex;
+        align-items: center;
+        color: white;
+        font-weight: bold;
+    }
+    .nav-right button {
+        margin: 0 5px;
+        padding: 5px 10px; 
+        font-size: 16px; 
+    }
+    .nav-right div {
+        margin-left: 15px;
+        display: none; 
+    }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .submodule {
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #f0f8ff;
+            border: 2px solid black;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 800;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .submodule:hover {
+            background-color: grey;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            
+                <img src="C:/xampp/htdocs/project/logo.jpg" alt="Logo" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;">
+               <a href="login.html"><span id="home">Home</span>
+            </a>
+            <a href="about_us.html" id="aboutUs">About</a>
+            <a href="hello.html" id="courses">Courses</a>
+            <a href="#" id="profile">Profile</a>
+        </nav>
+        <div class="nav-right">
+            <!-- Streak Button -->
+            <button onclick="toggleVisibility('streak')" data-translate="streak">Streak 🔥</button>
+            <div id="streak">
+                <div id="streak-container">
+                    🔥 <span data-translate="streak">Streak</span>: <span id="streak-count">5</span> days
+                </div>
+            </div>
+        
+            <!-- Add space -->
+            <span style="margin: 0 10px;"></span>
+        
+            <!-- Coins Button -->
+            <button onclick="toggleVisibility('coins')" data-translate="coins">Coins 🪙</button>
+            <div id="coins">
+                <div id="coin-container">
+                    🪙 <span data-translate="coins">Coins</span>: <span id="coin-count">0</span>
+                </div>
+    </header>
+    <div class="background">
+        <div class="triangle" style="top: 10%; left: 50%; animation-duration: 12s;"></div>
+        <div class="circle" style="top: 30%; left: 50%; animation-duration: 18s;"></div>
+        <div class="triangle" style="top: 60%; left: 80%; animation-duration: 15s;"></div>
+        <div class="circle" style="top: 80%; left: 30%; animation-duration: 18s;"></div>
+    </div>
+
+
+    <div class="container">
+        <h1 id="preamble">Preamble</h1>
+        <div class="submodule" onclick="location.href='intro_preamble.html'">
+            <span id="intro_preamble">Introduction to the Preamble</span>
+        </div>
+        <div class="submodule" onclick="location.href='text_of_the_preamble.html'">
+            <span id="text_preamble">Text of the Preamble</span>
+        </div>
+        <div class="submodule" onclick="location.href='key_terms_in_preamble.html'">
+            <span id="key_terms_preamble">Key Terms in the Preamble</span>
+        </div>
+        <div class="submodule" onclick="location.href='philosophy_behind_preamble.html'">
+            <span id="philosophy_preamble">The Philosophy Behind the Preamble</span>
+        </div>
+        <div class="submodule" onclick="location.href='constitutional_goals.html'">
+            <span id="goals_preamble">Constitutional Goals and Objectives</span>
+        </div>
+        <div class="submodule" onclick="location.href='significance_of_preamble.html'">
+            <span id="significance_preamble">The Significance of the Preamble in Legal Context</span>
+        </div>
+    </div>
+
+    <script>
+        function applyTranslations() {
+            const lang = localStorage.getItem('selectedLanguage') || 'en'; 
+            
+            document.getElementById("home").innerText = translations[lang].home;
+            document.getElementById("aboutUs").innerText = translations[lang].about_us;
+            document.getElementById("courses").innerText = translations[lang].courses;
+            document.getElementById("profile").innerText = translations[lang].profile;
+            
+            document.getElementById("coins").innerText = translations[lang].coins;
+
+            document.getElementById("streak").innerText = translations[lang].streak;
+            document.getElementById("preamble").innerText = translations[lang].preamble;
+            document.getElementById("intro_preamble").innerText = translations[lang].intro_preamble;
+            document.getElementById("text_preamble").innerText = translations[lang].text_preamble;
+            document.getElementById("key_terms_preamble").innerText = translations[lang].key_terms_preamble;
+            document.getElementById("philosophy_preamble").innerText = translations[lang].philosophy_preamble;
+            document.getElementById("goals_preamble").innerText = translations[lang].goals_preamble;
+            document.getElementById("significance_preamble").innerText = translations[lang].significance_preamble;
+        }
+
+        document.addEventListener("DOMContentLoaded", applyTranslations);
+    </script>
+</body>
+</html>
